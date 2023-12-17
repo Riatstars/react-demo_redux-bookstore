@@ -3,7 +3,6 @@ import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import PaginationBar from "../components/PaginationBar";
 import SearchForm from "../components/SearchForm";
-import api from "../apiService";
 import { FormProvider } from "../form";
 import { useForm } from "react-hook-form";
 import {
@@ -25,13 +24,13 @@ const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  const { books, pageNum, totalPage, limit, error } = useSelector((state) => {
-    return state.books;
-  });
+  const { books, pageNum, totalPage, limit, error, status } = useSelector(
+    (state) => {
+      return state.books;
+    }
+  );
 
-  const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
-  const [errorMessage, setErrorMessage] = useState(error);
 
   const navigate = useNavigate();
   const handleClickBook = (bookId) => {
@@ -57,7 +56,7 @@ const HomePage = () => {
         <Typography variant="h3" sx={{ textAlign: "center" }}>
           Book Store
         </Typography>
-        {errorMessage && <Alert severity="danger">{}</Alert>}
+        {error && <Alert severity="danger">{}</Alert>}
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Stack
             spacing={2}
@@ -72,7 +71,7 @@ const HomePage = () => {
         <PaginationBar pageNum={pageNum} totalPageNum={totalPage} />
       </Stack>
       <div>
-        {loading ? (
+        {status === "loading" ? (
           <Box sx={{ textAlign: "center", color: "primary.main" }}>
             <ClipLoader color="inherit" size={150} loading={true} />
           </Box>

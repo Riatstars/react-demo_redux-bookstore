@@ -21,9 +21,8 @@ const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 const ReadingPage = () => {
   const dispatch = useDispatch();
 
-  const readingBooks = useSelector((state) => state.reading.readings);
-
-  const [loading, setLoading] = useState(false);
+  const { readings, status } = useSelector((state) => state.reading);
+  const readingBooks = readings;
   const [removedBookId, setRemovedBookId] = useState("");
   const navigate = useNavigate();
 
@@ -77,7 +76,7 @@ const ReadingPage = () => {
       <Typography variant="h3" sx={{ textAlign: "center" }} m={3}>
         Book Store
       </Typography>
-      {loading ? (
+      {status === "loading" ? (
         <Box sx={{ textAlign: "center", color: "primary.main" }}>
           <ClipLoader color="inherit" size={150} loading={true} />
         </Box>

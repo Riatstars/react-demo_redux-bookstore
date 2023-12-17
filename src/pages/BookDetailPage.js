@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Container, Button, Box, Grid, Stack, Typography } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getBook, getBooks } from "../service/books/slice";
+import { getBook } from "../service/books/slice";
 import { addReading } from "../service/reading/slice";
 import { toast } from "react-toastify";
 
@@ -13,8 +13,6 @@ const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 
 const BookDetailPage = () => {
   const [loading, setLoading] = useState(false);
-
-  const [addingBook, setAddingBook] = useState(false);
 
   const params = useParams();
   const bookId = params.id;
@@ -28,7 +26,6 @@ const BookDetailPage = () => {
     } catch (error) {
       toast.error(error.message);
     }
-    setAddingBook(false);
   };
 
   // useEffect(() => {
