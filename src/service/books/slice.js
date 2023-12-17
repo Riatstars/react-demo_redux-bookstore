@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../apiService";
-import { useDispatch } from "react-redux";
+import { create } from "@mui/material/styles/createTransitions";
 
 const initialState = {
   books: [],
-  pageNum: 2,
+  showingBook: {},
+  pageNum: 1,
   totalPage: 10,
   limit: 10,
   status: "idle",
@@ -14,11 +15,19 @@ export const getBooks = createAsyncThunk(
   "books/getBooks",
   async ({ limit, pageNum, query }) => {
     let url = `/books?_page=${pageNum}&_limit=${limit}`;
-    if (query) url += `&q=${query}`;
+    if (query) {
+      url += `&q=${query}`;
+    }
     const res = await api.get(url);
     return res.data;
   }
 );
+export const getBook = createAsyncThunk("books/getBook", async (bookId) => {
+  let url = `/books/${bookId}`;
+  const res = await api.get(url);
+  console.log(res.data);
+  return res.data;
+});
 
 export const booksSlice = createSlice({
   name: "books",
@@ -38,6 +47,18 @@ export const booksSlice = createSlice({
         state.books = action.payload;
       })
       .addCase(getBooks.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(getBook.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getBook.fulfilled, (state, action) => {
+        state.status = "idle";
+        console.log(action.payload);
+        state.showingBook = action.payload;
+      })
+      .addCase(getBook.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

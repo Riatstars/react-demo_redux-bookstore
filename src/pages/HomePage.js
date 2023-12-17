@@ -18,7 +18,7 @@ import {
   CardContent,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { booksSlice, getBooks } from "../service/books/slice";
+import { getBooks } from "../service/books/slice";
 
 const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 
@@ -57,7 +57,7 @@ const HomePage = () => {
         <Typography variant="h3" sx={{ textAlign: "center" }}>
           Book Store
         </Typography>
-        {errorMessage && <Alert severity="danger">{errorMessage}</Alert>}
+        {errorMessage && <Alert severity="danger">{}</Alert>}
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Stack
             spacing={2}
