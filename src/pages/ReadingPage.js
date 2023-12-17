@@ -40,37 +40,6 @@ const ReadingPage = () => {
     dispatch(getReading());
   }, [dispatch, removedBookId]);
 
-  // useEffect(() => {
-  //   if (removedBookId) return;
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const res = await api.get(`/favorites`);
-  //       setBooks(res.data);
-  //     } catch (error) {
-  //       toast(error.message);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchData();
-  // }, [removedBookId]);
-
-  // useEffect(() => {
-  //   if (!removedBookId) return;
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       await api.delete(`/favorites/${removedBookId}`);
-  //       toast.success("The book has been removed");
-  //       setRemovedBookId("");
-  //     } catch (error) {
-  //       toast(error.message);
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchData();
-  // }, [removedBookId]);
-
   return (
     <Container>
       <Typography variant="h3" sx={{ textAlign: "center" }} m={3}>

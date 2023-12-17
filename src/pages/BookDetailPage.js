@@ -28,35 +28,6 @@ const BookDetailPage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const postData = async () => {
-  //     if (!addingBook) return;
-  //     setLoading(true);
-  //     try {
-  //       await api.post(`/favorites`, addingBook);
-  //
-  //     } catch (error) {
-  //
-  //     }
-  //     setLoading(false);
-  //   };
-  //   postData();
-  // }, [addingBook]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const res = await api.get(`/books/${bookId}`);
-  //       setBook(res.data);
-  //     } catch (error) {
-  //
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchData();
-  // }, [bookId]);
-
   useEffect(() => {
     setLoading(true);
     try {
